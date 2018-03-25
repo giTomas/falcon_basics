@@ -19,42 +19,39 @@ def isRunning(data):
 	return data['status'] == 'running'
 
 def listUrls(archivePath=pathToArchive):
-		jsonfiles = [f for f in os.listdir(archivePath) if path.isfile(path.join(archivePath, f))]
-		ids = [path.splitext(f)[0] for f in jsonfiles]
-		urls = [path.join('tests', f) for f in ids]
-		return urls
+	jsonfiles = [f for f in os.listdir(archivePath) if path.isfile(path.join(archivePath, f))]
+	ids 	  = [path.splitext(f)[0] for f in jsonfiles]
+	urls      = [path.join('tests', f) for f in ids]
+	return urls
 
 class RunningTestResource:
 	running_test = dict({'status': 'none', 'id': 'none'})
 
-
 	def on_post(self, req, resp):
-		self.running_test = req.media
 		if isRunning(req.media):
-			print('updated {}'.format(self.running_test))
 			self.running_test = req.media
+			print('Running test updated {}'.format(self.running_test))
 		else:
-			print('test done')
 			file_name = '{}/{}.json'.format(pathToArchive, self.running_test['id'])
 			with open(file_name, 'w') as f:
 				json.dump(self.running_test, f)
 			self.running_test = dict({'status': 'none', 'id': 'none'})
+			print('Test done - added to archive')
 
 	def on_get(self, req, resp):
 		resp.status = falcon.HTTP_200
+		resp.body = json.dumps(self.running_test, ensure_ascii=False)
 		if isRunning(self.running_test):
-			resp.body = json.dumps(self.running_test, ensure_ascii=False)
-			print('Send data - running test')
+			print('Sent data - running test')
 		else:
-			resp.body = json.dumps(self.running_test, ensure_ascii=False)
-			print('Send data - no running test')
+			print('Sendt data - no running test')
 
 class TestsResource:
 	def on_get(self, req, resp):
 		resp.status = falcon.HTTP_200
 		urls = listUrls()
 		resp.body = json.dumps(urls, ensure_ascii=False)
-		print('Send data - all tests from archive')
+		print('Sent data - all tests from archive')
 
 class TestFromTestsResource:
 	def on_get(self, req, resp, id):
@@ -63,7 +60,7 @@ class TestFromTestsResource:
 		with open(testName, 'r') as f:
 			data = json.load(f)
 			resp.body =json.dumps(data, ensure_ascii=False)
-		print('Send data - test {}'.format(id))
+		print('Sent data - test {}'.format(id))
 
 api = application = falcon.API()
 api.add_route('/running-test', RunningTestResource())
