@@ -100,5 +100,6 @@ ENV/
 # mypy
 .mypy_cache/
 
+__pychache__/*
 archive/*
 *json
