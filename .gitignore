@@ -103,3 +103,4 @@ ENV/
 __pychache__/*
 archive/*
 *json
+.idea/*
