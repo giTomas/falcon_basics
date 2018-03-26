@@ -63,6 +63,8 @@ class TestFromTestsResource:
 		print('Sent data - test {}'.format(id))
 
 api = application = falcon.API()
-api.add_route('/running-test', RunningTestResource())
-api.add_route('/tests', TestsResource())
-api.add_route('/tests/{id}', TestFromTestsResource())
+api.add_route('/tests/running', RunningTestResource())
+api.add_route('/tests/archive/', TestsResource())
+api.add_route('/tests/archive/{id}', TestFromTestsResource())
+# tests/running/{id}
+# tests/running/done/{id}
