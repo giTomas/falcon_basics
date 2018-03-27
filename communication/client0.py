@@ -4,8 +4,8 @@ import random
 import time
 import json
 
-# url = 'http://127.0.0.1:8000'
-url = 'http://BTS-826GLV1.main.intgin.net:8000'
+url = 'http://127.0.0.1:8000'
+#url = 'http://BTS-826GLV1.main.intgin.net:8000'
 runningUrl = '{}/test/running'.format(url)
 tn = 5
 
