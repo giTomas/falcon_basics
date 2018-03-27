@@ -1,0 +1,25 @@
+import requests
+import uuid
+import random
+import time
+
+tn = 5
+for i in range(1, tn+1):
+	test = {}
+	test['id'] = uuid.uuid4()
+	test['status'] = 'running'
+	test['steps'] = int(random.randint(4,8))
+	test['results'] = []
+	
+	for j in range(1, test['steps']+1):	
+		(test['results']).append({'step': j, 'passed': 'ok'})
+		# requests.post('http://127.0.0.1:8000/running-test', data=json.dumps(test))
+		print('test no {}/{}  step {}/{}'.format(i, tn, j, test['steps'] ))   
+		time.sleep(random.randint(1,10))
+		
+				
+		
+	test['status'] = 'done'
+	print(test)	
+		
+print('done')

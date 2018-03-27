@@ -1,0 +1,36 @@
+import falcon
+import pickle
+import json
+
+class QuoteResource:
+    def on_get(self, req, resp):
+        """Handles GET requests"""
+        quote = {https://codereview.stackexchange.com/questions/147731/simple-rest-api-using-python-with-falcon
+            'quote': (
+                "I've always been more interested in "
+                "the future than in the past."
+            ),
+            'author': 'Grace Hopper'
+        }
+
+        resp.media = quote
+
+class HelloResource:
+    def on_get(self, req, resp):
+        """Handles GET requests"""
+        msg = {
+            'msg': 'Hello!'
+        }
+
+        resp.media = msg
+
+class TestResource:
+	def on_post(self, req, resp):
+		pass
+
+	def on_get(self, req, post):
+		pass
+
+api = application = falcon.API()
+api.add_route('/quote', QuoteResource())
+api.add_route('/sayHello', HelloResource())

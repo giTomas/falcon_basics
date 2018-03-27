@@ -1,1 +1,1 @@
-gunicorn --reload comminication.server
+gunicorn --reload communication.server
