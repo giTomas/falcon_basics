@@ -7,7 +7,6 @@ import json
 # url = 'http://127.0.0.1:8000'
 url = 'http://BTS-826GLV1.main.intgin.net:8000'
 runningUrl = '{}/test/running'.format(url)
-print(runningUrl)
 tn = 5
 
 def result_generator():
@@ -37,7 +36,6 @@ for i in range(1, tn+1):
 
 	test['status'] = 'done'
 	doneUrl = '{}/test/done/{}'.format(url, test['id'])
-	print(doneUrl)
 	requests.post(doneUrl , data=json.dumps(test))
 	print(test)
 
