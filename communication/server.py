@@ -84,6 +84,8 @@ class RunningTestDoneResource:
 
 class TestsResource:
 	def on_get(self, req, resp):
+		resp.set_header('Access-Control-Allow-Origin', '*')
+		# print(resp.headers)
 		resp.status = falcon.HTTP_200
 		urls = listUrls()
 		resp.body = json.dumps(urls, ensure_ascii=False)
