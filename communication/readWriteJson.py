@@ -3,7 +3,8 @@ import sys
 import os
 import os.path as path
 
-class ReadWriteJson:
+class ReadWriteJson(object):
+
     def __init__(self, archiveDir='archive', runningDir='running'):
 
         self._absPath = path.dirname(path.abspath(__file__))
@@ -28,6 +29,7 @@ class ReadWriteJson:
 
     def listArchive(self):
     	jsonfiles = [f for f in os.listdir(self._pathToArchive) if path.isfile(path.join(self._pathToArchive, f))]
+        # os.path.splitext - divide file name from ending
     	ids 	  = [path.splitext(f)[0] for f in jsonfiles]
     	return json.dumps(ids, ensure_ascii=False)
 
@@ -36,21 +38,22 @@ class ReadWriteJson:
             json.dump(data, f)
 
     def writeToArchive(self, data, id):
-        # file_name = '{}/{}.json'.format(_pathToArchive, id)
-        file_name = path.join(self._pathToArchive, id+'.json')
-        with open(file_name, 'w') as f:
+        file_name = '{}.json'.format(id)
+        file_path = path.join(self._pathToArchive, file_name)
+        with open(file_path, 'w') as f:
             json.dump(data, f)
 
     def readFromArchive(self, id):
-        file_name = path.join(self._pathToArchive, id+'.json')
-        with open(file_name, 'r') as f:
+        file_name = '{}.json'.format(id)
+        file_path = path.join(self._pathToArchive, file_name)
+        with open(file_path, 'r') as f:
             try:
                 data = json.load(f)
-            except ValueError as e:
-                data = {'ValueError': '{}'.format(e)}
+            except ValueError as err:
+                data = {'error': 'ValueError - {}'.format(err)}
             except:
-                e =  sys.exc_info()
-                data = {'error': '{} {}'.format(e[0], e[1])}
+                err, msg =  sys.exc_info()
+                data = {'error': '{err} - {msg}'.format(err=err, msg=msg)}
         return json.dumps(data, ensure_ascii=False)
 
     def readFromRunning(self):

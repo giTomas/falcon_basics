@@ -18,10 +18,10 @@ def result_generator():
 		return 'failed'
 
 for i in range(1, tn+1):
-	test = {}
-	test['id'] = int(uuid.uuid4())
-	test['status'] = 'running'
-	test['steps'] = random.randint(4,8)
+	test            = {}
+	test['id']      = int(uuid.uuid4())
+	test['status']  = 'running'
+	test['steps']   = random.randint(4,8)
 	test['results'] = []
 
 	requests.post(runningUrl, data=json.dumps(test))
