@@ -104,3 +104,4 @@ __pychache__/*
 archive/*
 *json
 .idea/*
+*.png

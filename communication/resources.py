@@ -1,13 +1,11 @@
 import falcon
 
 class Resource(object):
-
 	def __init__(self, storage, cors):
 		self.storage = storage
 		self.cors = cors
 
 class RunningTestResource(Resource):
-
 	def __init__(self, storage, cors='*'):
 		super().__init__(storage, cors)
 
@@ -23,7 +21,6 @@ class RunningTestResource(Resource):
 		print('Sent data - running test')
 
 class TestDoneResource(Resource):
-
 	def __init__(self, storage, cors='*'):
 		super().__init__(storage, cors)
 
@@ -35,7 +32,6 @@ class TestDoneResource(Resource):
 		print('Test done - added to archive')
 
 class TestsResource(Resource):
-
 	def __init__(self, storage, cors='*'):
 		super().__init__(storage, cors)
 
@@ -46,7 +42,6 @@ class TestsResource(Resource):
 		print('Sent data - all tests from archive')
 
 class TestFromTestsResource(Resource):
-
 	def __init__(self, storage, cors='*'):
 		super().__init__(storage, cors)
 
